@@ -6,8 +6,6 @@
 
 
 
-
-2018-9-17 1955
 39.combination sum 
 题目：给定一组候选数字（candidates）（没有重复）和目标数字（target），找到candidates 候选数字相加的所有唯一组合target。相同重复数目可以选自candidates 无限次数。
 思路：有人说这是0/1背包问题，但是该题的思路是回溯法
