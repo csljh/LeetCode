@@ -1,16 +1,23 @@
-//题目1、two sum
-//本题使用unordered_map来存储已有的数及其对应的序号，然后对于每一个新加入的数num，都查找map中是否存在target-num的数，若存在则输出
-
+/*
+7. Reverse Integer
+本题比较简单，一边取一边够造倒序数更加有效率
+主要注意判断是否越界，这里使用res/10 == ans 进行判断
+*/
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> map;
-        for(int i=0;i<nums.size();i++){
-            auto index = map.find(target - nums[i]);
-            if(index!=map.end()){
-                return {index->second,i};// index = map.find()  找到的是map，那么要得到其值，需要->second 
-            }
-            map[nums[i]]=i;
+    int reverse(int x) {
+        int res = 0, index =1, ans=0;
+        if(x<0){
+            index = -1;
+            x = x*(-1);
         }
+        while(x!=0){
+            res= res*10 + x%10;
+            x/=10;
+            if (res / 10 != ans)
+                return 0;
+            ans = res;
+        }
+        return res*index;
     }
 };

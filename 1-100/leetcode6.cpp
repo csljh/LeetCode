@@ -1,16 +1,31 @@
-//题目1、two sum
-//本题使用unordered_map来存储已有的数及其对应的序号，然后对于每一个新加入的数num，都查找map中是否存在target-num的数，若存在则输出
-
+/*
+本题主要找规律，然后利用额外的空间进行求解：
+1、利用nRows个string记录元素
+2、上下规律就是遇到头底就转向
+*/
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> map;
-        for(int i=0;i<nums.size();i++){
-            auto index = map.find(target - nums[i]);
-            if(index!=map.end()){
-                return {index->second,i};// index = map.find()  找到的是map，那么要得到其值，需要->second 
-            }
-            map[nums[i]]=i;
+    string convert(string s, int nRows) {
+        if (nRows <= 1)
+            return s;
+        const int len = (int)s.length();
+        string *str = new string[nRows];
+        int row = 0, step = 1;
+        for (int i = 0; i < len; ++i)
+        {
+            str[row].push_back(s[i]);
+            if (row == 0)
+                step = 1;
+            else if (row == nRows - 1)
+                step = -1;
+            row += step;
         }
+        s.clear();
+        for (int j = 0; j < nRows; ++j)
+        {
+            s.append(str[j]);
+        }
+        delete[] str;
+        return s;
     }
 };

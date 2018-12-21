@@ -1,16 +1,25 @@
-//题目1、two sum
-//本题使用unordered_map来存储已有的数及其对应的序号，然后对于每一个新加入的数num，都查找map中是否存在target-num的数，若存在则输出
-
+/*
+9. Palindrome Number
+找回文数，先排除负数
+然后倒序看是否相等？
+*/
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> map;
-        for(int i=0;i<nums.size();i++){
-            auto index = map.find(target - nums[i]);
-            if(index!=map.end()){
-                return {index->second,i};// index = map.find()  找到的是map，那么要得到其值，需要->second 
-            }
-            map[nums[i]]=i;
+    bool isPalindrome(int x) {
+        if(x<0)
+            return false;
+        if(x==0)
+            return true;
+        int y = 0;
+        int x1 = x;
+        while(x1!=0){
+            if((y*10 + x1%10) > INT_MAX)
+                return false;
+            y = y*10 + x1%10;
+            x1 = x1/10;
         }
+        if(x==y)
+            return true;
+        return false;
     }
 };
